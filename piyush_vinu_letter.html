@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>एक छोटी-सी माफ़ी ❤️</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;padding:24px 16px;display:grid;place-items:center;
+    font-family:system-ui,-apple-system,"Noto Sans Devanagari",sans-serif;
+    color:#805568;background:#f9e9ef}
+  main{width:min(100%,620px);background:#fffafb;border:2px solid #e8bdcc;
+    border-radius:28px;padding:clamp(24px,6vw,46px);text-align:center;
+    box-shadow:0 12px 36px #8c52601a}
+  h1{font-size:clamp(28px,6vw,38px);font-weight:600;margin:0 0 8px}
+  .sub{margin:0 0 26px;color:#9b7887}
+  input{width:100%;max-width:360px;padding:14px 16px;border:2px solid #e8bdcc;
+    border-radius:14px;font:inherit;font-size:17px;outline:none;background:white;color:#493440}
+  input:focus{border-color:#a66c83}
+  button{display:block;margin:14px auto 0;padding:13px 28px;border:0;border-radius:14px;
+    background:#9c6179;color:white;font:inherit;font-size:17px;cursor:pointer}
+  #message{margin-top:18px;color:#9b526b}
+  #letter{display:none;text-align:left;white-space:pre-wrap;line-height:1.9;
+    font-size:17px;color:#493440;margin-top:24px}
+  .sign{text-align:right;color:#9b6179;margin-top:18px}
+  .tiny{font-size:12px;color:#b18d9b;margin-top:26px}
+</style>
+</head>
+<body>
+<main>
+  <h1>एक छोटी-सी माफ़ी ❤️</h1>
+  <p class="sub">Piyush की तरफ़ से Vinu के लिए…</p>
+  <section id="gate">
+    <p>खत पढ़ने के लिए अपना नाम लिखो 💗</p>
+    <input id="name" type="text" placeholder="अपना नाम लिखें" autocomplete="off">
+    <button id="open">खत खोलो</button>
+    <div id="message" role="status"></div>
+  </section>
+  <article id="letter">
+पता नहीं शुरुआत कहाँ से करूँ। मुझसे जो भी गलतियाँ हुईं, उन सबके लिए दिल से माफ़ी चाहता हूँ।
+मुझे तुम्हें इस तरह इग्नोर नहीं करना चाहिए था। गुस्से में मैंने ऐसा किया, जिसका मुझे आज भी अफसोस है।
+मैं नहीं चाहता कि हमारे बीच जो हुआ, उसकी वजह से हमारी कहानी यहीं खत्म हो जाए। मैं चाहता हूँ कि हम पुरानी नाराज़गी, गलतफहमियाँ और शिकायतें पीछे छोड़कर एक बार फिर नई शुरुआत करें।
+मैं तुम्हें फिर से अपनी ज़िंदगी में पहले की तरह देखना चाहता हूँ। न कोई पुरानी बात, न कोई शिकायत—बस एक नई शुरुआत और पहले जैसी बातें।
+इस बार अपनी बातों से नहीं, अपने व्यवहार से तुम्हें दिखाना चाहता हूँ कि तुम्हारी मेरे लिए कितनी अहमियत है।
+बस एक बार मुझे माफ़ कर देना। मैं सच में सब कुछ ठीक करना चाहता हूँ। ❤️
+    <div class="sign">— Piyush</div>
+  </article>
+  <div class="tiny">यह पेज उसी ब्राउज़र में एक बार खुलने के लिए बनाया गया है।</div>
+</main>
+<script>
+const KEY = "piyush_vinu_letter_opened_v1";
+const gate = document.getElementById("gate");
+const letter = document.getElementById("letter");
+const message = document.getElementById("message");
+const nameInput = document.getElementById("name");
+function alreadyRead(){
+  gate.style.display = "none";
+  letter.style.display = "none";
+  message.textContent = "यह खत पहले ही पढ़ा जा चुका है ❤️";
+  gate.style.display = "block";
+}
+if (localStorage.getItem(KEY) === "yes") alreadyRead();
+document.getElementById("open").addEventListener("click", () => {
+  if (localStorage.getItem(KEY) === "yes") { alreadyRead(); return; }
+  if (nameInput.value.trim().toLocaleLowerCase() !== "vinu") {
+    message.textContent = "नाम सही नहीं है। फिर से कोशिश करो।";
+    return;
+  }
+  localStorage.setItem(KEY, "yes");
+  gate.style.display = "none";
+  letter.style.display = "block";
+});
+nameInput.addEventListener("keydown", e => {
+  if(e.key === "Enter") document.getElementById("open").click();
+});
+</script>
+</body>
+</html>
